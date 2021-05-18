@@ -4,12 +4,9 @@ import IntroGridForm from "../../components/IntroGridForm";
 
 import ArrowRightGreen from "../../assets/arrow-right-green.svg";
 
-import { RegisterContainer } from "./styles";
-
 const Registration = () => {
   return (
-    <RegisterContainer>
-      <Intro />
+    <Intro>
       <IntroGridForm name="Registration" to="/" textLink="Back" >
         <form>
           <Input type="text" placeholder="Nome" />
@@ -20,7 +17,7 @@ const Registration = () => {
           </button>
         </form>
       </IntroGridForm>
-    </RegisterContainer>
+    </Intro>
   );
 };
 

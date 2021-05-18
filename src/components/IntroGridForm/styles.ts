@@ -18,6 +18,12 @@ export const GridFormContainer = styled.div`
     grid-template-columns: 1fr;
 
     width: 350px;
+    @media (max-width: 400px) {
+      width: 340px;
+    }
+    @media (max-width: 330px) {
+      width: 310px;
+    }
     a {
       color: #c1c1c1;
       font-size: 17px;

@@ -1,9 +1,27 @@
 import styled from "styled-components";
 
 export const IntroContainer = styled.section`
+  background-color: #f7f7f7;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+
+  height: 100vh;
+  width: 100%;
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+export const GridLeft = styled.section`
   color: #707070;
   display: grid;
   justify-items: center;
+  @media (max-width: 800px) {
+    display: none;
+  }
   h1 {
     font-style: italic;
     font-weight: bold;
@@ -32,3 +50,6 @@ export const IntroContainer = styled.section`
     margin: 16px 0;
   }
 `;
+
+export const GridRight = styled.section`
+`

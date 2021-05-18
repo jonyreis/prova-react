@@ -4,12 +4,9 @@ import IntroGridForm from "../../components/IntroGridForm";
 
 import ArrowRightGreen from "../../assets/arrow-right-green.svg";
 
-import { ResetPasswordContainer } from "./styles";
-
 const ResetPassword = () => {
   return (
-    <ResetPasswordContainer>
-      <Intro />
+    <Intro>
       <IntroGridForm name="Reset Password" to="/" textLink="Back">
         <form>
           <Input type="email" placeholder="Email" />
@@ -18,7 +15,7 @@ const ResetPassword = () => {
           </button>
         </form>
       </IntroGridForm>
-    </ResetPasswordContainer>
+    </Intro>
   );
 };
 

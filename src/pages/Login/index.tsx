@@ -6,12 +6,10 @@ import IntroGridForm from "../../components/IntroGridForm";
 
 import ArrowRightGreen from "../../assets/arrow-right-green.svg";
 
-import { LoginContainer } from "./styles";
 
 const Login = () => {
   return (
-    <LoginContainer>
-      <Intro />
+    <Intro>
       <IntroGridForm name="Authentication" to="/registration" textLink="Sign Up" >
         <form>
           <Input type="email" placeholder="Email" />
@@ -22,7 +20,7 @@ const Login = () => {
           </button>
         </form>
       </IntroGridForm>
-    </LoginContainer>
+    </Intro>
   );
 };
 
