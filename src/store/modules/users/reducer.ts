@@ -6,7 +6,8 @@ const INITIAL_STATE: Array<IUser> = []
 const users: Reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'ADD_USER': {
-      return action.payload
+      INITIAL_STATE.push(action.payload)
+      return [...INITIAL_STATE]
     }
     case 'REMOVE_USER': {
       return action.payload
