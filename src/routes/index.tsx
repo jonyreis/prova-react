@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Login from "../pages/Login";
-import Logout from "../pages/Logout";
+import Registration from '../pages/Registration';
 
 
 const Routes: React.FC = () => {
@@ -10,7 +10,7 @@ const Routes: React.FC = () => {
   return (
     <Switch>
       <Route path="/" exact component={Login} />
-      <Route path="/logout" exact component={Logout} />
+      <Route path="/registration" exact component={Registration} />
     </Switch>
   );
 };
