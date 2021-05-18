@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 import Intro from "../../components/Intro";
 import Input from "../../components/Input";
+import IntroGridForm from "../../components/IntroGridForm";
 
-import ArrowRightBlack from "../../assets/arrow-right-black.svg";
 import ArrowRightGreen from "../../assets/arrow-right-green.svg";
 
 import { LoginContainer } from "./styles";
@@ -12,8 +12,7 @@ const Login = () => {
   return (
     <LoginContainer>
       <Intro />
-      <div className="auth-container">
-        <h3>Authentication</h3>
+      <IntroGridForm name="Authentication" to="/registration" textLink="Sign Up" >
         <form>
           <Input type="email" placeholder="Email" />
           <Input type="password" placeholder="Password" />
@@ -22,8 +21,7 @@ const Login = () => {
             Log In <img src={ArrowRightGreen} alt="" />
           </button>
         </form>
-        <Link className="sign-up" to="signup">Sign Up <img src={ArrowRightBlack} alt="" /></Link>
-      </div>
+      </IntroGridForm>
     </LoginContainer>
   );
 };
