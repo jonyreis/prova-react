@@ -4,7 +4,6 @@ export const HeaderContainer = styled.header`
   background-color: #F7F7F7;
   border-bottom: 2px solid #EBEBEB;
   color: #707070;
-  margin-bottom: 20px;
   .container {
     font-weight: 700;
     font-style: italic;
