@@ -12,10 +12,10 @@ const Routes: React.FC = () => {
   const { auth } = useSelector((state: RootStateOrAny) => state)
 
   const publicRoute = (Component: React.FC) =>
-  auth[0].name ? () => <Redirect to="/home" /> : Component
+  auth.name ? () => <Redirect to="/home" /> : Component
 
   const privateRoute = (Component: React.FC) =>
-  auth[0].name ? Component : () => <Redirect to="/" />
+  auth.name ? Component : () => <Redirect to="/" />
 
   return (
     <Switch>

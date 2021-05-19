@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny  } from 'react-redux';
 import { Link } from "react-router-dom";
 
 import Intro from "../../components/Intro";
@@ -7,7 +7,6 @@ import IntroGridForm from "../../components/IntroGridForm";
 
 import ArrowRightGreen from "../../assets/arrow-right-green.svg";
 
-import { useSelector, RootStateOrAny } from 'react-redux'
 import { clearInput } from "../../utils/clearInput";
 
 const Login = () => {
@@ -23,15 +22,13 @@ const Login = () => {
       password: event.target[1].value,
     }
 
-    const userAuthenticate = users.filter((user: { email: string, password: string }) => {
+    users.forEach((user: { email: string, password: string }) => {
       if (user.email === userLogin.email && user.password === userLogin.password) {
-        return { user }
+        dispatch({
+          type: 'USER_AUTH',
+          payload: user
+        })    
       }
-    })
-
-    dispatch({
-      type: 'USER_AUTH',
-      payload: userAuthenticate
     })
 
     clearInput(event)

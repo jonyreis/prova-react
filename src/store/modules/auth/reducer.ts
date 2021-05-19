@@ -11,6 +11,9 @@ const userAuth: Reducer = (state = INITIAL_STATE, action) => {
     case 'USER_AUTH': {
       return action.payload
     }
+    case 'LOGOUT': {
+      return action.payload
+    }
     default: {
       return state
     }
