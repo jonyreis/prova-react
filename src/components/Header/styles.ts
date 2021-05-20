@@ -12,9 +12,18 @@ export const HeaderContainer = styled.header`
     align-items: center;
     justify-content: space-between;
     
-    width: 1040px;
+    max-width: 1040px;
     height: 75.5px;
     margin: 0 auto;
+    @media (max-width: 1040px) {
+      padding: 0 32px;
+    }
+  }
+  .logo-home {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
   }
   h1 {
     font-size: 44px;
