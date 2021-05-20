@@ -1,19 +1,24 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Header from "../../components/Header"
+import GamesBtn from '../../components/GamesBtn';
 
 import ArrowRightGreen from "../../assets/arrow-right-green.svg";
 
-import { HomeContainer, GamesBtn } from './styles'
+import { HomeContainer } from './styles'
 
 const Home = () => {
-  const [game, setGame] = React.useState([])
+  const dispatch = useDispatch()
 
   async function getGame() {
     const response = await fetch('games.json')
     .then(res => res.json())
 
-    setGame(response.types)
+    dispatch({
+      type: 'ADD_GAMES',
+      payload: response.types
+    })
   }
 
   React.useEffect(() => {
@@ -29,12 +34,7 @@ const Home = () => {
             <h2>Recent games</h2>
             <span>Filters: </span>
             <ul>
-              {game.map((item: { type: string, color: string }) => 
-                <GamesBtn color={item.color} key={item.color}>
-                  <input type="radio" name="game" id={item.type} value={item.type} />
-                  <label htmlFor={item.type} >{item.type}</label>
-                </GamesBtn>
-              )}
+              <GamesBtn />
             </ul>
             </div>
           <Link className="btn-new-bet" to="/new-bet">New Bet <img src={ArrowRightGreen} alt="" /></Link>
