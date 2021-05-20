@@ -26,9 +26,21 @@ const Home = () => {
     const response = await fetch('games.json')
     .then(res => res.json())
 
+    const listGame = response.types.map((item: any) => {
+      return {
+        color: item.color,
+        type: item.type,
+        description: item.description,
+        maxNumber: item['max-number'],
+        minCartValue: item['min-cart-value'],
+        price: item.price,
+        range: item.range
+      }
+    })
+
     dispatch({
       type: 'ADD_GAMES',
-      payload: response.types
+      payload: listGame
     })
   }
 
