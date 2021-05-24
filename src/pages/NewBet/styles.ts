@@ -48,25 +48,42 @@ export const NewBetContainer = styled.div`
       grid-template-columns: repeat(9, 1fr);
       gap: 20px;
     }
-    .number {
-      background-color: #adc0c4;
-      border: none;
-      border-radius: 50%;
+    .container-action-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin-top: 40px;
+      button {
+        padding: 16px 28px;
+        cursor: pointer;
+        height: 52px;
+      }
+    }
+    .button-empty {
+      display: flex;
+      justify-content: space-between;
+      width: 300px;
+      button {
+        border: 1px solid #27c383;
+        border-radius: 10px;
+        background-color: transparent;
+        color: #27c383;
+        font-weight: 500;
+      }
+    }
+    .button-cart {
+      border: 1px solid #27c383;
+      border-radius: 10px;
+      background-color: #27c383;
       color: #fff;
-      font-size: 20px;
-      font-weight: bold;
+      font-weight: 700;
 
       display: flex;
       align-items: center;
-      justify-content: center;
-
-      width: 65px;
-      height: 65px;
-      cursor: pointer;
+      img {
+        margin-right: 28px;
+      }
     }
-    .selected {
-      background-color: #27c383;
-    }
-
   }
 `

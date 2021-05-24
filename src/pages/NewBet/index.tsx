@@ -64,7 +64,15 @@ const NewBet = () => {
               />
             )}
               </div>
-            )}
+          <div className="container-action-buttons">
+            <div className="button-empty">
+              <button type="button" onClick={() => handleCompleteGame()}>Complete Game</button>
+              <button type="button">Clear Game</button>
+            </div>
+            <button className="button-cart" type="button">
+              <img src={ShoppingCart} alt="" />
+              <span>Add to cart</span>
+            </button>
           </div>
         </section>
         <section className="cart-section">grid right</section>
