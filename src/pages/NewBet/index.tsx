@@ -2,6 +2,7 @@ import React from 'react'
 
 import Header from "../../components/Header"
 import GamesBtn from "../../components/GamesBtn"
+import ButtonNumber from '../../components/buttonNumber'
 
 import { IGames } from '../../store/modules/games/types'
 
@@ -53,12 +54,15 @@ const NewBet = () => {
           </div>
           <div className="numbers-container">
             {Array(selectedGame.range).fill('').map((item, index) => 
-              <div 
-                className="number"
+              <ButtonNumber
+                value={index + 1} 
                 key={index + 1}
-                onClick={(e) => handleSelectNumber(e)}
-              >
-                {String(index + 1).padStart(2, '0')}
+                selected={arraySelectedNumbers.indexOf(index + 1) !== -1 ? true : false}
+                selectedGame={selectedGame}
+                arraySelectedNumbers={arraySelectedNumbers}
+                setArraySelectedNumbers={setArraySelectedNumbers}
+              />
+            )}
               </div>
             )}
           </div>
