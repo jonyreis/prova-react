@@ -12,7 +12,7 @@ import { NewBetContainer } from './styles'
 
 
 const NewBet = () => {
-  const [selectNumber, setSelectNumber] = React.useState<number[]>([])
+  const [arraySelectedNumbers, setArraySelectedNumbers] = React.useState<number[]>([])
   const [selectedGame, setSelectedGame] = React.useState<IGames>({
     type: '', 
     color: '', 
@@ -22,19 +22,36 @@ const NewBet = () => {
     price: 0,
     range: 0
   })
-    
-  function handleSelectNumber(btnNumber: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    const num = Number(btnNumber.currentTarget.textContent)
 
-    if (selectNumber.indexOf(num) === -1 && selectNumber.length < 6) {
-      btnNumber.currentTarget.className = 'number selected'
-      setSelectNumber(prevState => [...prevState, num])
-    } else if (selectNumber.indexOf(num) !== -1) {
-      btnNumber.currentTarget.className = 'number'
-      const indexSelect = selectNumber.indexOf(num)
-      selectNumber.splice(indexSelect, 1)
-    } else {
-      alert(`A ${selectedGame.type} pode ter até ${selectedGame.maxNumber} números selecionados`)
+  const $buttonNumber = document.querySelectorAll('[data-js="button-number"]')
+
+  React.useEffect(() => {
+    setArraySelectedNumbers(prevState => prevState = [])
+
+    $buttonNumber.forEach(item => {
+      item.setAttribute('style', `${{background: '#adc0c4'}}`)
+    })
+
+  }, [selectedGame])
+
+  function handleCompleteGame() {
+    let randomNumber: number;
+
+    if (arraySelectedNumbers.length >= selectedGame.maxNumber) {
+      arraySelectedNumbers.splice(0, arraySelectedNumbers.length)
+
+      $buttonNumber.forEach(item => {
+        item.setAttribute('style', `${{background: '#adc0c4'}}`)
+      })
+    }
+
+    while (arraySelectedNumbers.length < selectedGame.maxNumber) {
+      randomNumber = Math.ceil(Math.random() * selectedGame.range)
+
+      if (arraySelectedNumbers.indexOf(randomNumber) === -1) {
+        arraySelectedNumbers.push(randomNumber)
+        setArraySelectedNumbers(prevState => [...prevState])
+      }
     }
   }
 
@@ -53,7 +70,7 @@ const NewBet = () => {
             <p>{selectedGame.description}</p>
           </div>
           <div className="numbers-container">
-            {Array(selectedGame.range).fill('').map((item, index) => 
+            {Array(selectedGame.range).fill('').map((item, index) =>
               <ButtonNumber
                 value={index + 1} 
                 key={index + 1}
@@ -63,7 +80,7 @@ const NewBet = () => {
                 setArraySelectedNumbers={setArraySelectedNumbers}
               />
             )}
-              </div>
+          </div>
           <div className="container-action-buttons">
             <div className="button-empty">
               <button type="button" onClick={() => handleCompleteGame()}>Complete Game</button>
