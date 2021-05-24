@@ -12,7 +12,7 @@ const ButtonNumber = (props: IButtonNumberProps) => {
   function handleSelectNumber(btnNumber: any) {
     const num = Number(btnNumber.currentTarget.textContent)
 
-    if (props.arraySelectedNumbers.indexOf(num) === -1 && props.arraySelectedNumbers.length < 6) {
+    if (props.arraySelectedNumbers.indexOf(num) === -1 && props.arraySelectedNumbers.length < props.selectedGame.maxNumber) {
       btnNumber.currentTarget.style.background = '#27c383'
       props.arraySelectedNumbers.push(num)
     } else if (props.arraySelectedNumbers.indexOf(num) !== -1) {

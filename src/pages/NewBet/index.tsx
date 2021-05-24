@@ -26,23 +26,26 @@ const NewBet = () => {
   const $buttonNumber = document.querySelectorAll('[data-js="button-number"]')
 
   React.useEffect(() => {
+    handleClearGame()
+  }, [selectedGame])
+
+  function handleClearGame() {
     setArraySelectedNumbers(prevState => prevState = [])
 
     $buttonNumber.forEach(item => {
       item.setAttribute('style', `${{background: '#adc0c4'}}`)
     })
-
-  }, [selectedGame])
+  }
 
   function handleCompleteGame() {
     let randomNumber: number;
 
+    $buttonNumber.forEach(item => {
+      item.setAttribute('style', `${{background: '#adc0c4'}}`)
+    })
+
     if (arraySelectedNumbers.length >= selectedGame.maxNumber) {
       arraySelectedNumbers.splice(0, arraySelectedNumbers.length)
-
-      $buttonNumber.forEach(item => {
-        item.setAttribute('style', `${{background: '#adc0c4'}}`)
-      })
     }
 
     while (arraySelectedNumbers.length < selectedGame.maxNumber) {
@@ -84,7 +87,7 @@ const NewBet = () => {
           <div className="container-action-buttons">
             <div className="button-empty">
               <button type="button" onClick={() => handleCompleteGame()}>Complete Game</button>
-              <button type="button">Clear Game</button>
+              <button type="button" onClick={() => handleClearGame()}>Clear Game</button>
             </div>
             <button className="button-cart" type="button">
               <img src={ShoppingCart} alt="" />
