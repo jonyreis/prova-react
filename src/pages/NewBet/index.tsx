@@ -9,6 +9,7 @@ import { IGames } from '../../store/modules/games/types'
 import ShoppingCart from '../../assets/shopping-cart.svg'
 
 import { NewBetContainer } from './styles'
+import Cart from '../../components/Cart'
 
 
 const NewBet = () => {
@@ -95,7 +96,11 @@ const NewBet = () => {
             </button>
           </div>
         </section>
-        <section className="cart-section">grid right</section>
+        <Cart 
+          arraySelectedNumbers={arraySelectedNumbers}
+          selectedGame={selectedGame}
+          gamesAddToCart={gamesAddToCart}
+        />
       </main>
     </NewBetContainer>
   )
