@@ -45,9 +45,9 @@ export const CartContainer = styled.section`
 
   .bet {
     display: grid;
-    grid-template-columns: 9fr 1.5fr 1fr;
-    direction: rtl;
+    grid-template-columns: 2fr 1fr 9fr;
     align-items: center;
+    justify-items: center;
 
     margin: 16px 0;
   }
@@ -57,6 +57,73 @@ export const CartContainer = styled.section`
     cursor: pointer;
   }
 
+  .separator {
+    content: "";
+    display: inline-block;
+    border-radius: 100px 0px 0px 100px;
+    width: 4px;
+    height: 86px;
+  }
+
+  .bet button {
+    background-color: transparent;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+  }
+
+  .bet-info {
+    display: flex;
+    flex-direction: column;
+    justify-self: left;
+
+    text-align: left;
+
+    margin-left: 14px;
+  }
+
+  .bet .array-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+    word-break: break-word;
+  }
+
+  .bet-info h4 {
+    color: #868686;
+
+    font-size: 15px;
+    font-style: italic;
+    font-weight: bold;
+    letter-spacing: 0px;
+
+    &::after {
+      content: ',';
+      display: inline-block;
+      
+      margin-right: 4px;
+      &:last-child {
+        display: none;
+      }
+    }
+    &:last-child {
+      &::after {
+      display: none;
+      }
+    }
+  }
+
+  .bet-info div strong {
+    color: #7f3992;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+  }
+
+  .bet-info div span {
+    color: #868686;
+  }
 
   .total {
     background-color: #fff;

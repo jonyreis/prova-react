@@ -14,6 +14,7 @@ import Cart from '../../components/Cart'
 
 const NewBet = () => {
   const [arraySelectedNumbers, setArraySelectedNumbers] = React.useState<number[]>([])
+  const [gamesAddToCart, setGamesAddToCart] = React.useState<Array<object>>([])
   const [selectedGame, setSelectedGame] = React.useState<IGames>({
     type: '', 
     color: '', 
@@ -59,6 +60,22 @@ const NewBet = () => {
     }
   }
 
+  function handleAddToCart() {
+    if (arraySelectedNumbers.length > 0 && arraySelectedNumbers.length === selectedGame.maxNumber) {
+      setGamesAddToCart(prevState => [...prevState, {
+        numbers: [...arraySelectedNumbers].sort(compararNumeros),
+        game: selectedGame.type,
+        color: selectedGame.color,
+        price: selectedGame.price
+      }])
+    }
+    return
+  }
+
+  function compararNumeros(a: number, b: number) {
+    return a - b;
+  }
+
   return (
     <NewBetContainer>
       <Header />
@@ -90,7 +107,7 @@ const NewBet = () => {
               <button type="button" onClick={() => handleCompleteGame()}>Complete Game</button>
               <button type="button" onClick={() => handleClearGame()}>Clear Game</button>
             </div>
-            <button className="button-cart" type="button">
+            <button onClick={() => handleAddToCart()} className="button-cart" type="button">
               <img src={ShoppingCart} alt="" />
               <span>Add to cart</span>
             </button>
