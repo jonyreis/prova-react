@@ -16,9 +16,10 @@ interface IListBetProps {
 interface ICartProps {
   listBet: Array<IListBetProps>
   onHandleDeleteBet(indexArray: number): void
+  onHandleTotalPrice(): string
 }
 
-const Cart = ({ listBet, onHandleDeleteBet }: ICartProps) => {
+const Cart = ({ listBet, onHandleDeleteBet, onHandleTotalPrice }: ICartProps) => {
   return (
     <CartContainer>
       <h3>CART</h3>
@@ -42,7 +43,7 @@ const Cart = ({ listBet, onHandleDeleteBet }: ICartProps) => {
       </div>
       <div className="total">
         <h2 data-js="total-price">
-          <span>Cart</span> Total: 0,00
+          <span>Cart</span> Total: {onHandleTotalPrice()}
         </h2>
       </div>
       <div className="save">

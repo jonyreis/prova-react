@@ -1,16 +1,17 @@
 import React from 'react'
 
+import convertToCurrency from '../../utils/convertToCurrency'
+
 import Header from "../../components/Header"
 import GamesBtn from "../../components/GamesBtn"
 import ButtonNumber from '../../components/buttonNumber'
+import Cart from '../../components/Cart'
 
 import { IGames } from '../../store/modules/games/types'
 
 import ShoppingCart from '../../assets/shopping-cart.svg'
 
 import { NewBetContainer } from './styles'
-import Cart from '../../components/Cart'
-
 
 interface IListBetProps {
   numbers: Array<number>
@@ -71,17 +72,18 @@ const NewBet = () => {
   function handleAddToCart() {
     if (arraySelectedNumbers.length > 0 && arraySelectedNumbers.length === selectedGame.maxNumber) {
       setListBet(prevState => [...prevState, {
-        numbers: [...arraySelectedNumbers].sort(compareNumbers),
+        numbers: [...arraySelectedNumbers].sort(handleCompareNumbers),
         type: selectedGame.type,
         color: selectedGame.color,
         price: selectedGame.price,
         key: `${selectedGame.type}-${new Date().getTime()}`
       }])
+      handleClearGame()
     }
     return
   }
 
-  function compareNumbers(a: number, b: number) {
+  function handleCompareNumbers(a: number, b: number) {
     return a - b;
   }
 
@@ -90,6 +92,12 @@ const NewBet = () => {
     newArray.splice(indexArray, 1)
     
     setListBet([...newArray])
+  }
+
+  function handleTotalPrice() {
+    const totalPrice = listBet.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0)
+
+    return convertToCurrency(totalPrice)
   }
 
   return (
@@ -132,6 +140,7 @@ const NewBet = () => {
         <Cart 
           listBet={listBet}
           onHandleDeleteBet={handleDeleteBet}
+          onHandleTotalPrice={handleTotalPrice}
         />
       </main>
     </NewBetContainer>
