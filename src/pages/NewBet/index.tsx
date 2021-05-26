@@ -1,6 +1,8 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
-import convertToCurrency from '../../utils/convertToCurrency'
+import { getDate } from '../../utils/getDate'
 
 import Header from "../../components/Header"
 import GamesBtn from "../../components/GamesBtn"
@@ -34,6 +36,8 @@ const NewBet = () => {
     range: 0
   })
 
+  const dispatch = useDispatch()
+  const history = useHistory()
   const $buttonNumber = document.querySelectorAll('[data-js="button-number"]')
 
   React.useEffect(() => {
@@ -76,6 +80,7 @@ const NewBet = () => {
         type: selectedGame.type,
         color: selectedGame.color,
         price: selectedGame.price,
+        date: getDate(),
         key: `${selectedGame.type}-${new Date().getTime()}`
       }])
       handleClearGame()
@@ -97,7 +102,19 @@ const NewBet = () => {
   function handleTotalPrice() {
     const totalPrice = listBet.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0)
 
-    return convertToCurrency(totalPrice)
+    return totalPrice
+  }
+
+  function handleSave() {
+    if (handleTotalPrice() >= 30) {
+      dispatch({
+        type: 'SAVE_BETS',
+        payload: listBet
+      })
+      history.push('/home')
+    } else {
+      alert('Para salvar os jogos o total deve ser de pelo menos R$ 30,00')
+    }
   }
 
   return (
@@ -141,6 +158,7 @@ const NewBet = () => {
           listBet={listBet}
           onHandleDeleteBet={handleDeleteBet}
           onHandleTotalPrice={handleTotalPrice}
+          onHandleSave={handleSave}
         />
       </main>
     </NewBetContainer>

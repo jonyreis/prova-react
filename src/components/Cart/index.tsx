@@ -1,7 +1,8 @@
+import convertToCurrency from '../../utils/convertToCurrency'
+
 import ArrowRightGreenDark from '../../assets/arrow-right-green-dark.svg'
 import Trash from '../../assets/trash.svg'
 
-import convertToCurrency from '../../utils/convertToCurrency'
 
 import { CartContainer } from './styles'
 
@@ -16,10 +17,16 @@ interface IListBetProps {
 interface ICartProps {
   listBet: Array<IListBetProps>
   onHandleDeleteBet(indexArray: number): void
-  onHandleTotalPrice(): string
+  onHandleTotalPrice(): number
+  onHandleSave(): void
 }
 
-const Cart = ({ listBet, onHandleDeleteBet, onHandleTotalPrice }: ICartProps) => {
+const Cart = ({ 
+  listBet, 
+  onHandleDeleteBet, 
+  onHandleTotalPrice, 
+  onHandleSave 
+}: ICartProps) => {
   return (
     <CartContainer>
       <h3>CART</h3>
@@ -43,11 +50,11 @@ const Cart = ({ listBet, onHandleDeleteBet, onHandleTotalPrice }: ICartProps) =>
       </div>
       <div className="total">
         <h2 data-js="total-price">
-          <span>Cart</span> Total: {onHandleTotalPrice()}
+          <span>Cart</span> Total: {convertToCurrency(onHandleTotalPrice())}
         </h2>
       </div>
       <div className="save">
-        <button type="button">Save <img src={ArrowRightGreenDark} alt="arrow-right" /></button>
+        <button type="button" onClick={() => onHandleSave()}>Save <img src={ArrowRightGreenDark} alt="arrow-right" /></button>
       </div>
     </CartContainer>
   )
