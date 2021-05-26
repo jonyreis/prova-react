@@ -1,29 +1,33 @@
-import React from 'react'
 import ArrowRightGreenDark from '../../assets/arrow-right-green-dark.svg'
 import Trash from '../../assets/trash.svg'
-import { IGames } from '../../store/modules/games/types'
 
 import convertToCurrency from '../../utils/convertToCurrency'
 
 import { CartContainer } from './styles'
 
-interface ICartProps {
-  arraySelectedNumbers: Array<number>
-  selectedGame: IGames
-  gamesAddToCart: Array<any>
+interface IListBetProps {
+  numbers: Array<number>
+  type: string
+  color: string
+  price: number
+  key: string
 }
 
-const Cart = (props: ICartProps) => {
+interface ICartProps {
+  listBet: Array<IListBetProps>
+  onHandleDeleteBet(indexArray: number): void
+}
 
-  console.log(props.gamesAddToCart)
-
+const Cart = ({ listBet, onHandleDeleteBet }: ICartProps) => {
   return (
     <CartContainer>
       <h3>CART</h3>
       <div data-js="bets" className="bets">
-        {props.gamesAddToCart.map((item, index: any) => 
-          <div data-js="bet" className="bet" key={`${index-item.color}`}>
-            <img src={Trash} alt="trash" />
+        {listBet.map((item, index: number) => 
+          <div data-js="bet" className="bet" key={item.key}>
+            <button type="button" onClick={() => onHandleDeleteBet(index)}>
+              <img src={Trash} alt="trash" />
+            </button>
             <div className="separator" style={{background: item.color}}></div>
             <div className="bet-info">
               <div className="array-numbers">

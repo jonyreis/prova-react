@@ -12,9 +12,17 @@ import { NewBetContainer } from './styles'
 import Cart from '../../components/Cart'
 
 
+interface IListBetProps {
+  numbers: Array<number>
+  type: string
+  color: string
+  price: number
+  key: string
+}
+
 const NewBet = () => {
   const [arraySelectedNumbers, setArraySelectedNumbers] = React.useState<number[]>([])
-  const [gamesAddToCart, setGamesAddToCart] = React.useState<Array<object>>([])
+  const [listBet, setListBet] = React.useState<Array<IListBetProps>>([])
   const [selectedGame, setSelectedGame] = React.useState<IGames>({
     type: '', 
     color: '', 
@@ -62,18 +70,26 @@ const NewBet = () => {
 
   function handleAddToCart() {
     if (arraySelectedNumbers.length > 0 && arraySelectedNumbers.length === selectedGame.maxNumber) {
-      setGamesAddToCart(prevState => [...prevState, {
-        numbers: [...arraySelectedNumbers].sort(compararNumeros),
-        game: selectedGame.type,
+      setListBet(prevState => [...prevState, {
+        numbers: [...arraySelectedNumbers].sort(compareNumbers),
+        type: selectedGame.type,
         color: selectedGame.color,
-        price: selectedGame.price
+        price: selectedGame.price,
+        key: `${selectedGame.type}-${new Date().getTime()}`
       }])
     }
     return
   }
 
-  function compararNumeros(a: number, b: number) {
+  function compareNumbers(a: number, b: number) {
     return a - b;
+  }
+
+  function handleDeleteBet(indexArray: number) {
+    let newArray = listBet
+    newArray.splice(indexArray, 1)
+    
+    setListBet([...newArray])
   }
 
   return (
@@ -114,9 +130,8 @@ const NewBet = () => {
           </div>
         </section>
         <Cart 
-          arraySelectedNumbers={arraySelectedNumbers}
-          selectedGame={selectedGame}
-          gamesAddToCart={gamesAddToCart}
+          listBet={listBet}
+          onHandleDeleteBet={handleDeleteBet}
         />
       </main>
     </NewBetContainer>

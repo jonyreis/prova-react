@@ -114,15 +114,16 @@ export const CartContainer = styled.section`
     }
   }
 
-  .bet-info div strong {
+  .bet-info strong {
     color: #7f3992;
     font-size: 16px;
     font-style: italic;
     font-weight: bold;
   }
 
-  .bet-info div span {
+  .bet-info span {
     color: #868686;
+    margin-left: 8px;
   }
 
   .total {
