@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
 import React from 'react'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 
@@ -22,27 +24,54 @@ import {
   TypeBet,
   NewBet
  } from './styles'
-import { IGames } from '../../store/modules/games/types';
+
+interface IListWithFilter {
+  numbers: Array<number>
+  type: string
+  color: string
+  price: number
+  key: string
+  date: string
+}
 
 const Home = () => {
-  const [selectedGame, setSelectedGame] = React.useState<IGames>({
-    type: '', 
-    color: '', 
-    description: '',
-    maxNumber: 0,
-    minCartValue: 0,
-    price: 0,
-    range: 0
-  })
-
-  const dispatch = useDispatch()
+  const [selectedFilter, setSelectedFilter] = React.useState<string>('')
+  const [listWithFilter, setListWithFilter] = React.useState<Array<IListWithFilter>>([])
+  
   const { bets } = useSelector((state: RootStateOrAny) => state)
+  const dispatch = useDispatch()
 
+  React.useEffect(() => {
+    getGame()
+  },[])
+
+  React.useEffect(() => {
+    setListWithFilter(bets)
+  }, [])
+
+  React.useEffect(() => {
+    if (selectedFilter === '') return setListWithFilter(bets)
+    
+    const filteredList = bets.filter((bet: { type: string }) => {
+      if (bet.type === selectedFilter) return bet.type === selectedFilter
+    })
+
+    setListWithFilter(filteredList)
+  }, [selectedFilter])
+  
   async function getGame() {
     const response = await fetch('games.json')
-    .then(res => res.json())
+      .then(res => res.json())
 
-    const listGame = response.types.map((item: any) => {
+    const listGame = response.types.map((item: {
+      color: string; 
+      type: string; 
+      description: string;
+      ['max-number']: number;
+      ['min-cart-value']: number;
+      price: number; 
+      range: number; 
+    }) => {
       return {
         color: item.color,
         type: item.type,
@@ -60,10 +89,6 @@ const Home = () => {
     })
   }
 
-  React.useEffect(() => {
-    getGame()
-  },[])
-
   return (
     <HomeContainer>
       <Header />
@@ -73,21 +98,15 @@ const Home = () => {
             <h2>Recent games</h2>
             <span>Filters </span>
             <ul>
-              <GamesBtn setSelectedGame={setSelectedGame} />
+              <GamesBtn 
+                setSelectedFilter={setSelectedFilter}
+              />
             </ul>
           </FiltersContainer>
           <NewBet to="/new-bet">New Bet <img src={ArrowRightGreen} alt="" /></NewBet>
         </FiltersAndLink>
         <Bets>
-          {bets.map((bet: 
-            { 
-              numbers: Array<number>; 
-              color: string; 
-              date: string;
-              price: number; 
-              type: string; 
-              key: string 
-            }) => 
+          {listWithFilter.map((bet) => 
             <Bet key={bet.key}>
               <Separator color={bet.color} />
               <BetInfo>

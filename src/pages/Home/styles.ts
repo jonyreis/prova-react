@@ -60,7 +60,7 @@ export const NewBet = styled(Link)`
 export const Bets = styled.ul`
   display: flex;
   flex-direction: column;
-  max-height: 500px;
+  max-height: 460px;
   padding: 16px 0;
   margin: 16px 0;
   overflow: auto;
