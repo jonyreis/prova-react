@@ -1,9 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
-import { HeaderContainer } from './styles';
+import { Container, HeaderContainer, LinkContainerDesktop, LinkContainerMobile, LinkHome, LogoHome } from './styles';
 
-import ArrowRightBlack from '../../assets/arrow-right-black.svg'
+import LogOut from '../../assets/log-out.svg'
+import ArrowRightBlack from '../../assets/log-out.svg'
+import ShoppingCartGreen from '../../assets/shopping-cart-green.svg'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -21,16 +23,37 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <div className="container">
-        <div className="logo-home">
+      <Container>
+        <LogoHome>
           <h1>TGL</h1>
-          {pathname === '/new-bet' && <Link to="/">Home</Link>}
-        </div>
-        <ul>
-          <li><Link to="#">Account</Link></li>
-          <li><Link to="/" onClick={handleLogout}>Sair <img src={ArrowRightBlack} alt="" /></Link></li>
-        </ul>
-      </div>
+          {pathname === '/new-bet' && <LinkHome to="/">Home</LinkHome>}
+        </LogoHome>
+        <LinkContainerDesktop>
+          <li>
+            <Link to="#">Account</Link>
+          </li>
+          <li>
+            <Link to="/" onClick={handleLogout}>
+              Sair 
+              <img src={ArrowRightBlack} alt="" />
+            </Link>
+            </li>
+        </LinkContainerDesktop>
+        <LinkContainerMobile>
+          {pathname === '/new-bet' && 
+            <li>
+              <button type="button">
+                <img src={ShoppingCartGreen} alt="" />
+              </button>
+            </li>
+          }
+          <li>
+            <button type="button" onClick={handleLogout}>
+              <img src={LogOut} alt="" />
+            </button>
+          </li>
+        </LinkContainerMobile>
+      </Container>
     </HeaderContainer>
   )
 }
