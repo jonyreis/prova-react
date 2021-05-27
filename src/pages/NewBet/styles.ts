@@ -8,11 +8,12 @@ export const NewBetContainer = styled.div`
     grid-template-columns: auto 320px;
     gap: 40px;
 
-    width: 1040px;
+    max-width: 1080px;
     margin: 0 auto;
     padding: 40px 0;
-    @media (max-width: 1040px) {
-      padding: 0 32px;
+    @media (max-width: 1090px) {
+      padding: 40px 32px;
+      gap: 20px;
     }
   }
   .main-section {
@@ -44,9 +45,13 @@ export const NewBetContainer = styled.div`
       margin: 24px 0;
     }
     .numbers-container {
-      display: grid;
-      grid-template-columns: repeat(9, 1fr);
-      gap: 20px;
+      /* display: grid;
+      grid-template-columns: repeat(9, 1fr); */
+      display: flex;
+      /* justify-content: space-around; */
+      flex-wrap: wrap;
+      /* gap: 10px; */
+      max-width: 720px;
     }
     .container-action-buttons {
       display: flex;

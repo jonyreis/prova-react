@@ -16,7 +16,13 @@ export const ButtonNumberContainer = styled.button<IButtonNumberContainerProps>`
   align-items: center;
   justify-content: center;
 
-  width: 65px;
-  height: 65px;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  
   cursor: pointer;
+  @media (max-width: 900px) {
+    width: 60px;
+    height: 60px;
+  }
 `

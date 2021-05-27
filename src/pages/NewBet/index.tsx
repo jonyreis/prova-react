@@ -7,7 +7,7 @@ import { getDate } from '../../utils/getDate'
 
 import Header from "../../components/Header"
 import GamesBtn from "../../components/GamesBtn"
-import ButtonNumber from '../../components/buttonNumber'
+import ButtonNumber from '../../components/ButtonNumber'
 import Cart from '../../components/Cart'
 
 import { IGames } from '../../store/modules/games/types'
