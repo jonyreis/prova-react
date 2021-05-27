@@ -10,6 +10,9 @@ export const Main = styled.main`
   max-width: 1040px;
   margin: 0 auto;
   padding-top: 80px;
+  @media (max-width: 1100px) {
+    padding: 80px 36px 0;
+  }
 `
 
 export const FiltersAndLink = styled.section`
@@ -60,7 +63,7 @@ export const NewBet = styled(Link)`
 export const Bets = styled.ul`
   display: flex;
   flex-direction: column;
-  max-height: 460px;
+  max-height: calc(100vh - 300px);
   padding: 16px 0;
   margin: 16px 0;
   overflow: auto;
