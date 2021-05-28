@@ -14,7 +14,17 @@ import { IGames } from '../../store/modules/games/types'
 
 import ShoppingCart from '../../assets/shopping-cart.svg'
 
-import { NewBetContainer } from './styles'
+import { 
+  NewBetContainer, 
+  Main,
+  IntroNewBet,
+  ChooseAGame, 
+  DescriptionGame, 
+  NumbersContainer, 
+  ActionButtonsContainer, 
+  EmptyButtons, 
+  CartButton 
+} from './styles'
 
 interface IListBetProps {
   numbers: Array<number>
@@ -121,18 +131,22 @@ const NewBet = () => {
   return (
     <NewBetContainer>
       <Header />
-      <main>
-        <section className="main-section">
-          <h2><span>New bet</span> for {selectedGame.type}</h2>
-          <strong className="choose-a-game">Choose a game</strong>
+      <Main>
+        <section>
+          <IntroNewBet>
+            <h2>
+              <span>New bet</span> for {selectedGame.type}
+            </h2>
+            <ChooseAGame className="choose-a-game">Choose a game</ChooseAGame>
           <ul>
             <GamesBtn setSelectedGame={setSelectedGame} />
           </ul>
-          <div className="description-game">
+            <DescriptionGame>
             <h4>Fill your bet</h4>
             <p>{selectedGame.description}</p>
-          </div>
-          <div className="numbers-container">
+            </DescriptionGame>
+          </IntroNewBet>
+          <NumbersContainer>
             {Array(selectedGame.range).fill('').map((item, index) =>
               <ButtonNumber
                 value={index + 1} 
@@ -143,17 +157,23 @@ const NewBet = () => {
                 setArraySelectedNumbers={setArraySelectedNumbers}
               />
             )}
-          </div>
-          <div className="container-action-buttons">
-            <div className="button-empty">
-              <button type="button" onClick={() => handleCompleteGame()}>Complete Game</button>
-              <button type="button" onClick={() => handleClearGame()}>Clear Game</button>
-            </div>
-            <button onClick={() => handleAddToCart()} className="button-cart" type="button">
+          </NumbersContainer>
+          <ActionButtonsContainer>
+            <EmptyButtons>
+              <button 
+                type="button" 
+                onClick={() => handleCompleteGame()}>Complete Game
+              </button>
+              <button 
+                type="button" 
+                onClick={() => handleClearGame()}>Clear Game
+              </button>
+            </EmptyButtons>
+            <CartButton type="button" onClick={() => handleAddToCart()}>
               <img src={ShoppingCart} alt="" />
               <span>Add to cart</span>
-            </button>
-          </div>
+            </CartButton>
+          </ActionButtonsContainer>
         </section>
         <Cart 
           listBet={listBet}
@@ -161,7 +181,7 @@ const NewBet = () => {
           onHandleTotalPrice={handleTotalPrice}
           onHandleSave={handleSave}
         />
-      </main>
+      </Main>
     </NewBetContainer>
   )
 }
