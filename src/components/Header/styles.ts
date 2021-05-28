@@ -5,6 +5,12 @@ export const HeaderContainer = styled.header`
   background-color: #F7F7F7;
   border-bottom: 2px solid #EBEBEB;
   color: #707070;
+  @media (max-width: 900px) {
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+  }
 `
 
 export const Container = styled.div`

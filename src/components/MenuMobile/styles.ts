@@ -38,6 +38,7 @@ export const LinkRoute = styled(Link)`
     max-width: 24px;
   }
   .link-new-bet {
+    border: 4px solid #fff;
     border-radius: 50%;
     box-shadow: 2px 2px 8px #0000002E;
     min-width: 90px;
@@ -63,12 +64,4 @@ export const LinkDisabled = styled.button`
   img {
     max-width: 24px;
   }
-`
-
-export const LinkNewBet = styled(Link)`
-  border-radius: 50%;
-  box-shadow: 2px 2px 8px #0000002E;
-  width: 90px;
-  position: absolute;
-  bottom: 20px;
 `

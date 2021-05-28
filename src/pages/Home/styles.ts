@@ -24,6 +24,9 @@ export const Main = styled.main`
 export const FiltersAndLink = styled.section`
   display: flex;
   align-items: center;
+  @media (max-width: 900px) {
+    padding-top: 60px;
+  }
 `
 
 export const FiltersContainer = styled.div`
@@ -46,12 +49,18 @@ export const FiltersContainer = styled.div`
     font-size: 24px;
     font-style: italic;
     text-transform: uppercase;
+    @media (max-width: 670px) {
+      font-size: 22px;
+    }
   }
 
   span {
     color: #868686;
     font-size: 17px;
     font-style: italic;
+    @media (max-width: 670px) {
+      font-size: 15px;
+    }
   }
   ul {
     display: flex;
@@ -100,6 +109,7 @@ export const Bets = styled.ul`
   }
   @media (max-width: 670px) {
     max-height: calc(100vh - 340px);
+    margin: 8px 0;
   }
 `
 
