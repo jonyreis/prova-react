@@ -8,6 +8,7 @@ import GlobalStyles from "./styles/globalStyles";
 
 import Routes from './routes';
 import Footer from "./components/Footer";
+import MenuMobile from "./components/MenuMobile";
 
 import { store, persistor } from './store';
 
@@ -20,6 +21,7 @@ const App: React.FC = () => (
       </PersistGate>
     </Provider>
     <Footer />
+    <MenuMobile />
   </BrowserRouter>
 );
 

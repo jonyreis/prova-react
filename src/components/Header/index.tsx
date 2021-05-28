@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Container, HeaderContainer, LinkContainerDesktop, LinkContainerMobile, LinkHome, LogoHome } from './styles';
 
 import LogOut from '../../assets/log-out.svg'
-import ArrowRightBlack from '../../assets/log-out.svg'
+import ArrowRightBlack from '../../assets/arrow-right-black.svg'
 import ShoppingCartGreen from '../../assets/shopping-cart-green.svg'
 
 const Header = () => {

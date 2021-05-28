@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 export const HomeContainer = styled.div`
   background-color: #F7F7F7;
   height: calc(100vh - 79px);
+  @media (max-width: 900px) {
+    height: 100vh;
+  }
 `
 
 export const Main = styled.main`
@@ -63,7 +66,7 @@ export const NewBet = styled(Link)`
 export const Bets = styled.ul`
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 300px);
+  max-height: calc(100vh - 310px);
   padding: 16px 0;
   margin: 16px 0;
   overflow: auto;

@@ -10,6 +10,9 @@ export const IntroContainer = styled.section`
 
   height: calc(100vh - 80px);
   width: 100%;
+  @media (max-width: 900px) {
+    min-height: 100vh;
+  }
   @media (max-width: 800px) {
     grid-template-columns: 1fr;
   }

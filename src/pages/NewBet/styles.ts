@@ -2,7 +2,10 @@ import styled from 'styled-components'
 
 export const NewBetContainer = styled.div`
   background-color: #F7F7F7;
-  min-height: calc(100vh - 80px);
+  height: calc(100vh - 80px);
+  @media (max-width: 900px) {
+    height: 100vh;
+  }
   main {
     display: grid;
     grid-template-columns: auto 320px;
@@ -59,6 +62,9 @@ export const NewBetContainer = styled.div`
       align-items: center;
 
       margin-top: 40px;
+      @media (max-width: 900px) {
+        display: none;
+      }
       button {
         padding: 16px 28px;
         cursor: pointer;
