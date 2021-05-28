@@ -6,6 +6,11 @@ type GamesBtnContainerProps = {
   
 export const GamesBtnContainer = styled.li<GamesBtnContainerProps>`
   margin: 0 8px;
+  @media (max-width: 670px) {
+    &:first-child {
+      margin-left: 0;
+    }
+  }
   input {
     display: none;
   }
@@ -17,6 +22,14 @@ export const GamesBtnContainer = styled.li<GamesBtnContainerProps>`
     font-weight: bold;
     padding: 8px 20px;
     cursor: pointer;
+    @media (max-width: 375px) {
+      font-size: 13px;
+      padding: 10px 18px;
+    }
+    @media (max-width: 330px) {
+      font-size: 12px;
+      padding: 8px 14px;
+    }
   }
 
   input[type="radio"] + label {

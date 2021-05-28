@@ -16,6 +16,9 @@ export const Main = styled.main`
   @media (max-width: 1100px) {
     padding: 80px 36px 0;
   }
+  @media (max-width: 670px) {
+    padding: 32px 16px 0;
+  }
 `
 
 export const FiltersAndLink = styled.section`
@@ -28,6 +31,15 @@ export const FiltersContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   min-width: 630px;
+
+  @media (max-width: 670px) {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    
+    min-width: 100%;
+    height: 120px;
+  }
 
   h2 {
     color: #707070;
@@ -43,6 +55,7 @@ export const FiltersContainer = styled.div`
   }
   ul {
     display: flex;
+    justify-content: center;
   }
 `
 
@@ -57,7 +70,9 @@ export const NewBet = styled(Link)`
   align-items: center;
 
   margin-left: auto;
-
+  @media (max-width: 900px) {
+    display: none;
+  }
   img {
     margin-left: 8px;
   }
@@ -82,6 +97,9 @@ export const Bets = styled.ul`
   &::-webkit-scrollbar-thumb {
     background-color: #aaa;
     border-radius: 8px;
+  }
+  @media (max-width: 670px) {
+    max-height: calc(100vh - 340px);
   }
 `
 
@@ -122,6 +140,7 @@ export const BetInfo = styled.div`
 
 export const Numbers = styled.div`
   display: flex;
+  flex-wrap: wrap;
   h4 {
     color: #868686;
 
@@ -144,6 +163,9 @@ export const Numbers = styled.div`
       display: none;
       }
     }
+    @media (max-width: 540px) {
+      font-size: 16px;
+    }
   }
 `
 
@@ -151,6 +173,9 @@ export const DateAndPrice = styled.h3`
   color: #868686;
   font-size: 17px;
   font-weight: 400;
+  @media (max-width: 540px) {
+    font-size: 14px;
+  }
 `
 
 interface ITypeBetProps {
@@ -162,4 +187,7 @@ export const TypeBet = styled.h2<ITypeBetProps>`
   font-size: 20px;
   font-weight: 700;
   font-style: italic;
+  @media (max-width: 540px) {
+    font-size: 16px;
+  }
 `

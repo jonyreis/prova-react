@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 export const MenuMobileContainer = styled.div`
   background-color: #fff;
   border-radius: 16px 16px 0 0;
-  width: 100%;
+  max-width: 100vw;
+  min-width: 100vw;
   height: 70px;
   position: fixed;
   bottom: 0;
