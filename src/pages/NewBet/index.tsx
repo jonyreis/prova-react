@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { getDate } from '../../utils/getDate'
@@ -48,6 +48,7 @@ const NewBet = () => {
     range: 0
   })
 
+  const { cart } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
   const history = useHistory()
   const $buttonNumber = document.querySelectorAll('[data-js="button-number"]')
@@ -166,7 +167,7 @@ const NewBet = () => {
             </ActionButtonsMobileContainer>
           }
           </IntroNewBet>
-          <NumbersContainer>
+          <NumbersContainer cartMobile={cart}>
             {Array(selectedGame.range).fill('').map((item, index) =>
               <ButtonNumber
                 value={index + 1} 

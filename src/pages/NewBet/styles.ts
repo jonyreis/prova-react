@@ -97,13 +97,18 @@ export const DescriptionGame = styled.div`
   }
 `
 
-export const NumbersContainer = styled.div`
+interface INumbersContainerProps {
+  cartMobile: boolean
+}
+
+export const NumbersContainer = styled.div<INumbersContainerProps>`
   display: flex;
   flex-wrap: wrap;
   max-width: 720px;
   @media (max-width: 900px) {
     margin-top: 280px;
     padding-bottom: 100px;
+    position: ${props => props.cartMobile ? 'fixed' : 'initial'};
   }
   @media (max-width: 420px) {
     margin-top: 220px;

@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Container, HeaderContainer, LinkContainerDesktop, LinkContainerMobile, LinkHome, LogoHome } from './styles';
@@ -10,6 +10,13 @@ import ShoppingCartGreen from '../../assets/shopping-cart-green.svg'
 const Header = () => {
   const dispatch = useDispatch()
   const { pathname } = useLocation()
+
+  function handleCart() {
+    dispatch({
+      type: 'CART_ON',
+      payload: true
+    })
+  }
   
   function handleLogout() {
     dispatch({
@@ -42,7 +49,7 @@ const Header = () => {
         <LinkContainerMobile>
           {pathname === '/new-bet' && 
             <li>
-              <button type="button">
+              <button type="button" onClick={handleCart}>
                 <img src={ShoppingCartGreen} alt="" />
               </button>
             </li>
