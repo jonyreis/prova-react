@@ -23,7 +23,8 @@ import {
   NumbersContainer, 
   ActionButtonsContainer, 
   EmptyButtons, 
-  CartButton 
+  CartButton, 
+  ActionButtonsMobileContainer
 } from './styles'
 
 interface IListBetProps {
@@ -95,8 +96,9 @@ const NewBet = () => {
         key: `${selectedGame.type}-${new Date().getTime()}`
       }])
       handleClearGame()
+    } else {
+      alert(`A ${selectedGame.type} deve ter ${selectedGame.maxNumber} números selecionados`) 
     }
-    return
   }
 
   function handleCompareNumbers(a: number, b: number) {
@@ -138,13 +140,31 @@ const NewBet = () => {
               <span>New bet</span> for {selectedGame.type}
             </h2>
             <ChooseAGame className="choose-a-game">Choose a game</ChooseAGame>
-          <ul>
-            <GamesBtn setSelectedGame={setSelectedGame} />
-          </ul>
+            <ul>
+              <GamesBtn setSelectedGame={setSelectedGame} />
+            </ul>
             <DescriptionGame>
-            <h4>Fill your bet</h4>
-            <p>{selectedGame.description}</p>
+              <h4>Fill your bet</h4>
+              <p>{selectedGame.description}</p>
             </DescriptionGame>
+            {selectedGame.type !== '' &&
+            <ActionButtonsMobileContainer>
+              <button
+                className="empty-buttons"
+                type="button" 
+                onClick={() => handleCompleteGame()}>Complete Game
+              </button>
+              <button
+                className="empty-buttons"
+                type="button" 
+                onClick={() => handleClearGame()}>Clear Game
+              </button>
+              <CartButton type="button" onClick={() => handleAddToCart()}>
+                <img src={ShoppingCart} alt="" />
+                <span>Add to cart</span>
+              </CartButton>
+            </ActionButtonsMobileContainer>
+          }
           </IntroNewBet>
           <NumbersContainer>
             {Array(selectedGame.range).fill('').map((item, index) =>

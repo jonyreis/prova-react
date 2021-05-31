@@ -34,7 +34,7 @@ export const IntroNewBet = styled.div`
   @media (max-width: 900px) {
     background-color: #F7F7F7;
     position: fixed;
-    width: 100%;
+    width: calc(100vw - 32px);
     margin-top: -4px;
   }
   h2 {
@@ -46,6 +46,12 @@ export const IntroNewBet = styled.div`
     text-transform: uppercase;
     @media (max-width: 900px) {
       margin: 16px 0;
+    }
+    @media (max-width: 370px) {
+      font-size: 22px;
+    }
+    @media (max-width: 350px) {
+      font-size: 20px;
     }
     span {
       font-weight: 700;
@@ -73,12 +79,20 @@ export const DescriptionGame = styled.div`
     margin: 16px 0;
     max-width: 90%;
   }
-  @media (max-width: 670px) {
+  @media (max-width: 760px) {
     h4 {
       font-size: 16px;
     }
     p {
       font-size: 14px;
+    }
+  }
+  @media (max-width: 420px) {
+    h4 {
+      display: none;
+    }
+    p {
+      display: none;
     }
   }
 `
@@ -88,8 +102,11 @@ export const NumbersContainer = styled.div`
   flex-wrap: wrap;
   max-width: 720px;
   @media (max-width: 900px) {
-    margin-top: 260px;
+    margin-top: 280px;
     padding-bottom: 100px;
+  }
+  @media (max-width: 420px) {
+    margin-top: 220px;
   }
 `
 
@@ -109,10 +126,54 @@ export const ActionButtonsContainer = styled.div`
   }
 `
 
+export const ActionButtonsMobileContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: 500px;
+  margin: 10px 0;
+  @media (min-width: 901px) {
+    display: none;
+  }
+  @media (max-width: 420px) {
+    margin: 16px 0;
+  }
+  @media (max-width: 370px) {
+    margin: 30px 0 10px;
+  }
+
+  button {
+    padding: 16px 32px;
+    cursor: pointer;
+    height: 52px;
+    @media (max-width: 470px) {
+      padding: 8px 16px;
+    }
+    @media (max-width: 470px) {
+      padding: 6px 12px;
+      height: 44px;
+    }
+    @media (max-width: 350px) {
+      padding: 6px;
+    }
+  }
+  .empty-buttons {
+    border: 1px solid #27c383;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #27c383;
+    font-weight: 500;
+  }
+`
+
 export const EmptyButtons = styled.div`
   display: flex;
   justify-content: space-between;
   width: 300px;
+  @media (max-width: 900px) {
+    max-width: 100%;
+  }
   button {
     border: 1px solid #27c383;
     border-radius: 10px;
@@ -133,5 +194,11 @@ export const CartButton = styled.button`
   align-items: center;
   img {
     margin-right: 28px;
+    @media (max-width: 900px) {
+      margin-right: 14px;
+    }
+    @media (max-width: 400px) {
+      display: none;
+    }
   }
 `

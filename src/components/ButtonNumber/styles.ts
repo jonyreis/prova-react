@@ -25,4 +25,8 @@ export const ButtonNumberContainer = styled.button<IButtonNumberContainerProps>`
     width: 60px;
     height: 60px;
   }
+  @media (max-width: 370px) {
+    width: 48px;
+    height: 48px;
+  }
 `
