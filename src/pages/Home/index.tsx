@@ -10,6 +10,8 @@ import GamesBtn from '../../components/GamesBtn';
 
 import ArrowRightGreen from "../../assets/arrow-right-green.svg";
 
+import api from '../../services/api'
+
 import { 
   HomeContainer, 
   Main, 
@@ -60,6 +62,10 @@ const Home = () => {
   }, [selectedFilter])
   
   async function getGame() {
+
+    const responseApi = await api.get(`/register`)
+    console.log(responseApi)
+    
     const response = await fetch('games.json')
       .then(res => res.json())
 

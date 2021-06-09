@@ -1,4 +1,4 @@
-import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Container, HeaderContainer, LinkContainerDesktop, LinkContainerMobile, LinkHome, LogoHome } from './styles';

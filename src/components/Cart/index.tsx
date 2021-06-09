@@ -30,8 +30,6 @@ const Cart = ({
   onHandleTotalPrice, 
   onHandleSave 
 }: ICartProps) => {
-  const [isBackdrop, setIsBackdrop] = React.useState(false)
-
   const { cart } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
   
