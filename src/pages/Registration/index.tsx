@@ -6,17 +6,19 @@ import Intro from "../../components/Intro";
 import Input from "../../components/Input";
 import IntroGridForm from "../../components/IntroGridForm";
 
+import api from '../../services/api'
+
 import ArrowRightGreen from "../../assets/arrow-right-green.svg";
 
 const Registration = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   
-  function handleRegistration(event: { preventDefault?: any; target: any; }) {
+  async function handleRegistration(event: { preventDefault?: any; target: any; }) {
     event.preventDefault()
 
     const user = {
-      name: event.target[0].value,
+      username: event.target[0].value,
       email: event.target[1].value,
       password: event.target[2].value,
     }
@@ -25,6 +27,15 @@ const Registration = () => {
       type: 'ADD_USER',
       payload: user
     })
+
+    await api.post('/register', user)
+      .then(function (response) {
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+
     clearInput(event)
     history.push('/')
   }
