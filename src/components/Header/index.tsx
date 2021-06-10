@@ -22,8 +22,9 @@ const Header = () => {
     dispatch({
       type: 'LOGOUT',
       payload: {
-        name: '',
-        password: ''
+        refreshToken: '',
+        token: '',
+        type: ''
       }
     })
   }

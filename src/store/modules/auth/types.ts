@@ -1,4 +1,5 @@
 export interface IUserAuth {
-  email: string
-  password: string
+  refreshToken: null | any,
+  token: string
+  type: string
 }

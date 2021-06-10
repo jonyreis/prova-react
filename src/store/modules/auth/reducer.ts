@@ -2,8 +2,9 @@ import { Reducer } from 'redux'
 import { IUserAuth } from './types'
 
 const INITIAL_STATE: IUserAuth = {
-  email: '',
-  password: ''
+  refreshToken: null,
+  token: '',
+  type: ''
 }
 
 const userAuth: Reducer = (state = INITIAL_STATE, action) => {

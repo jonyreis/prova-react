@@ -1,4 +1,4 @@
-import { useDispatch, useSelector, RootStateOrAny  } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 
 import { clearInput } from "../../utils/clearInput";
@@ -7,35 +7,38 @@ import Intro from "../../components/Intro";
 import Input from "../../components/Input";
 import IntroGridForm from "../../components/IntroGridForm";
 
+import api from '../../services/api'
+
 import ArrowRightGreen from "../../assets/arrow-right-green.svg";
 
 const Login = () => {
-  const { users } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
 
-
-  function handleAuthetication(event: { preventDefault?: any; target: any; }) {
+  async function handleAuthetication(event: { preventDefault?: any; target: any; }) {
     event.preventDefault()
 
     const userLogin = {
       email: event.target[0].value,
       password: event.target[1].value,
     }
-    users.forEach((user: { email: string, password: string }) => {
-      if (user.email === userLogin.email && user.password === userLogin.password) {
-        dispatch({
-          type: 'USER_AUTH',
-          payload: user
-        })    
-      } else if (user.email === userLogin.email && user.password !== userLogin.password) {
-        alert('A senha está errada!')
-      } else {
-        alert('Email não cadastrado!')
-      }
-    })
+
+    await api.post('/sessions', userLogin)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: 'USER_AUTH',
+            payload: response.data
+          })    
+        }
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
 
     clearInput(event)
   }
+
   return (
     <Intro>
       <IntroGridForm name="Authentication" to="/registration" textLink="Sign Up" >
