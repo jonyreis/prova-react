@@ -4,9 +4,10 @@ import { useSelector, RootStateOrAny } from 'react-redux';
 
 import Login from "../pages/Login";
 import Registration from '../pages/Registration';
-import ResetPassword from "../pages/ResetPassword";
+import ForgotPassword from "../pages/ForgotPassword";
 import Home from "../pages/Home";
 import NewBet from "../pages/NewBet";
+import ResetPassword from "../pages/ResetPassword";
 
 
 const Routes: React.FC = () => {
@@ -22,6 +23,7 @@ const Routes: React.FC = () => {
     <Switch>
       <Route path="/" exact component={publicRoute(Login)} />
       <Route path="/registration" exact component={publicRoute(Registration)} />
+      <Route path="/forgot-password" exact component={publicRoute(ForgotPassword)} />
       <Route path="/reset-password" exact component={publicRoute(ResetPassword)} />
       <Route path="/home" exact component={privateRoute(Home)} />
       <Route path="/new-bet" exact component={privateRoute(NewBet)} />

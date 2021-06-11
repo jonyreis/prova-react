@@ -30,13 +30,12 @@ const Login = () => {
             payload: response.data
           })    
         }
-        console.log(response)
       })
       .catch((error) => {
+        alert('E-mail ou senha inválidos!')
+        clearInput(event)
         console.log(error);
       })
-
-    clearInput(event)
   }
 
   return (
@@ -45,7 +44,7 @@ const Login = () => {
         <form onSubmit={handleAuthetication}>
           <Input type="email" placeholder="Email" />
           <Input type="password" placeholder="Password" />
-          <Link to="/reset-password">I forget my password</Link>
+          <Link to="/forgot-password">I forget my password</Link>
           <button type="submit">
             Log In <img src={ArrowRightGreen} alt="" />
           </button>
