@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
 import { clearInput } from '../../utils/clearInput';
 
 import Intro from "../../components/Intro";
@@ -11,7 +11,6 @@ import api from '../../services/api'
 import ArrowRightGreen from "../../assets/arrow-right-green.svg";
 
 const Registration = () => {
-  const dispatch = useDispatch()
   const history = useHistory()
   
   async function handleRegistration(event: { preventDefault?: any; target: any; }) {
@@ -23,23 +22,18 @@ const Registration = () => {
       password: event.target[2].value,
     }
 
-    dispatch({
-      type: 'ADD_USER',
-      payload: user
-    })
-
     await api.post('/register', user)
-      .then(function (response) {
-        console.log(response)
+      .then(() => {
+        alert('Usuário cadastrado com sucesso!')
+        history.push('/')
       })
-      .catch(function (error) {
+      .catch((error) => {
+        alert('E-mail ou Nome já cadastrado!')
         console.log(error);
       })
-
+      
     clearInput(event)
-    history.push('/')
   }
-
 
   return (
     <Intro>
