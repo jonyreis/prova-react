@@ -40,7 +40,7 @@ const Home = () => {
   const [selectedFilter, setSelectedFilter] = React.useState<string>('')
   const [listWithFilter, setListWithFilter] = React.useState<Array<IListWithFilter>>([])
   
-  const { bets } = useSelector((state: RootStateOrAny) => state)
+  const { auth, bets } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
 
   React.useEffect(() => {
@@ -62,14 +62,13 @@ const Home = () => {
   }, [selectedFilter])
   
   async function getGame() {
+    const { data } = await api.get('/games', { 
+      headers: { 
+      "Authorization": `Bearer ${auth.token}`
+      }
+    })
 
-    const responseApi = await api.get(`/register`)
-    console.log(responseApi)
-    
-    const response = await fetch('games.json')
-      .then(res => res.json())
-
-    const listGame = response.types.map((item: {
+    const listGame = data.map((item: {
       color: string; 
       type: string; 
       description: string;
