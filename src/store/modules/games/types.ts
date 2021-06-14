@@ -1,4 +1,5 @@
 export interface IGames {
+  id: number | null
   type: string
   color: string
   description: string

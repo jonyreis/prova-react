@@ -15,10 +15,10 @@ interface IGamesBtnProps {
 const GamesBtn = ({ setSelectedGame,  setSelectedFilter }: IGamesBtnProps) => {
   const { games } = useSelector((state: RootStateOrAny) => state)
   const { pathname } = useLocation()
-
   return (
     <>
       {games.map((item: {
+        id: number,
         type: string,
         color: string,
         description: string,
@@ -27,7 +27,7 @@ const GamesBtn = ({ setSelectedGame,  setSelectedFilter }: IGamesBtnProps) => {
         price: number,
         range: number
       }) =>
-        <GamesBtnContainer color={item.color} key={item.color}>
+        <GamesBtnContainer color={item.color} key={item.id}>
           {pathname === '/new-bet' &&
             <input 
               onClick={() => setSelectedGame(item)}
