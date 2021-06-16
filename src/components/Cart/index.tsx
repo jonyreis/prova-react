@@ -10,7 +10,7 @@ import Close from '../../assets/x.svg'
 import { Backdrop, CartContainer, BtnClose, Bets, Bet, ButtonnRemoveBet, Separator, BetInfo, ArrayNumbers, TypeAndPrice, Total, Save } from './styles'
 
 interface IListBetProps {
-  numbers: Array<number>
+  numbers: string
   type: string
   color: string
   price: number
@@ -30,7 +30,7 @@ const Cart = ({
   onHandleTotalPrice, 
   onHandleSave 
 }: ICartProps) => {
-  const { cart } = useSelector((state: RootStateOrAny) => state)
+  const { cart, bets } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
   
   function handleCloseCart() {
@@ -52,7 +52,7 @@ const Cart = ({
             <img src={Close} alt="Close Cart"/>
           </BtnClose>
           <Bets data-js="bets">
-            {listBet.map((item, index: number) => 
+            {bets.map((item: { key: React.Key | null | undefined; color: any; numbers: any; type: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; price: number; }, index: number) => 
               <Bet data-js="bet" key={item.key}>
                 <ButtonnRemoveBet type="button" onClick={() => onHandleDeleteBet(index)}>
                   <img src={Trash} alt="trash" />
@@ -60,7 +60,7 @@ const Cart = ({
                 <Separator style={{background: item.color}}></Separator>
                 <BetInfo>
                   <ArrayNumbers>
-                    {item.numbers.map((number: number) => <h4 key={number}>{String(number).padStart(2, '0')}</h4>)}
+                    <h4>{String(item.numbers)}</h4>
                   </ArrayNumbers>
                   <TypeAndPrice>
                     <strong style={{color: item.color}}>{item.type}</strong>

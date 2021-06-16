@@ -27,8 +27,10 @@ import {
   ActionButtonsMobileContainer
 } from './styles'
 
+import api from '../../services/api'
+
 interface IListBetProps {
-  numbers: Array<number>
+  numbers: string
   type: string
   color: string
   price: number
@@ -39,6 +41,7 @@ const NewBet = () => {
   const [arraySelectedNumbers, setArraySelectedNumbers] = React.useState<number[]>([])
   const [listBet, setListBet] = React.useState<Array<IListBetProps>>([])
   const [selectedGame, setSelectedGame] = React.useState<IGames>({
+    id: 0,
     type: '', 
     color: '', 
     description: '',
@@ -48,7 +51,7 @@ const NewBet = () => {
     range: 0
   })
 
-  const { cart } = useSelector((state: RootStateOrAny) => state)
+  const { auth, cart } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
   const history = useHistory()
   const $buttonNumber = document.querySelectorAll('[data-js="button-number"]')
@@ -88,22 +91,41 @@ const NewBet = () => {
 
   function handleAddToCart() {
     if (arraySelectedNumbers.length > 0 && arraySelectedNumbers.length === selectedGame.maxNumber) {
+      const numbersToString = transformNumbers(arraySelectedNumbers)
+
       setListBet(prevState => [...prevState, {
-        numbers: [...arraySelectedNumbers].sort(handleCompareNumbers),
+        numbers: numbersToString,
+        game_id: selectedGame.id,
         type: selectedGame.type,
         color: selectedGame.color,
         price: selectedGame.price,
         date: getDate(),
         key: `${selectedGame.type}-${new Date().getTime()}`
       }])
+
       handleClearGame()
     } else {
       alert(`A ${selectedGame.type} deve ter ${selectedGame.maxNumber} números selecionados`) 
     }
+
+    dispatch({
+      type: 'SAVE_BETS',
+      payload: listBet
+    })
   }
 
   function handleCompareNumbers(a: number, b: number) {
     return a - b;
+  }
+
+  function transformNumbers(currentArray: any[]) {
+    const numbersToString = [...currentArray].sort(handleCompareNumbers)
+
+    for (let i = 0; i < numbersToString.length; i++) {
+      numbersToString[i] = numbersToString[i].toString().padStart(2, '0')
+    }
+
+    return numbersToString.join(', ')
   }
 
   function handleDeleteBet(indexArray: number) {
@@ -119,8 +141,22 @@ const NewBet = () => {
     return totalPrice
   }
 
-  function handleSave() {
-    if (handleTotalPrice() >= 30) {
+  async function handleSave() {
+    if (handleTotalPrice() >= 3) {
+      await api.post('/game/bets', { list: listBet },
+      {
+        headers: { 
+          "Authorization": `Bearer ${auth.token}`
+        }
+      })
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => {
+        alert('Não foi possível criar a aposta.')
+        console.log(error)
+      })
+
       dispatch({
         type: 'SAVE_BETS',
         payload: listBet

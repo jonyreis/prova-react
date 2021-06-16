@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable array-callback-return */
 import React from 'react'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 
@@ -12,7 +10,7 @@ import ArrowRightGreen from "../../assets/arrow-right-green.svg";
 
 import api from '../../services/api'
 
-import { 
+import {
   HomeContainer, 
   Main, 
   FiltersAndLink, 
@@ -27,13 +25,18 @@ import {
   NewBet
  } from './styles'
 
+interface IGame {
+  color: string 
+  type: string 
+  price: number 
+} 
+
 interface IListWithFilter {
-  numbers: Array<number>
-  type: string
-  color: string
-  price: number
+  id: number
+  game: IGame
+  numbers: string
   key: string
-  date: string
+  created_at: string
 }
 
 const Home = () => {
@@ -48,27 +51,27 @@ const Home = () => {
   },[])
 
   React.useEffect(() => {
-    setListWithFilter(bets)
-  }, [])
-
-  React.useEffect(() => {
     if (selectedFilter === '') return setListWithFilter(bets)
-    
-    const filteredList = bets.filter((bet: { type: string }) => {
-      if (bet.type === selectedFilter) return bet.type === selectedFilter
+
+    const filteredList = bets.filter((bet: { game: { type: string; } }) => {
+      if (bet.game.type === selectedFilter) return bet
     })
 
     setListWithFilter(filteredList)
   }, [selectedFilter])
-  
+
   async function getGame() {
     const games = await api.get('/games', { 
-      headers: { 
-      "Authorization": `Bearer ${auth.token}`
+      headers: {
+        "Authorization": `Bearer ${auth.token}`
       }
     })
 
-    console.log(games.data)
+    const bets = await api.get('/game/bets', { 
+      headers: {
+        "Authorization": `Bearer ${auth.token}`
+      }
+    })
 
 
     const listGame = games.data.map((item: {
@@ -97,6 +100,14 @@ const Home = () => {
       type: 'ADD_GAMES',
       payload: listGame
     })
+
+    dispatch({
+      type: 'SAVE_BETS',
+      payload: bets.data
+    })
+
+    console.log(bets.data)
+    setListWithFilter(bets.data)
   }
 
   return (
@@ -115,22 +126,20 @@ const Home = () => {
           </FiltersContainer>
           <NewBet to="/new-bet">New Bet <img src={ArrowRightGreen} alt="" /></NewBet>
         </FiltersAndLink>
-        <Bets>
-          {listWithFilter.map((bet) => 
-            <Bet key={bet.key}>
-              <Separator color={bet.color} />
-              <BetInfo>
-                <Numbers>
-                  {bet.numbers.map((number: number) => 
-                    <h4 key={number}>{String(number).padStart(2, '0')}</h4>
-                  )}
-                </Numbers>
-                <DateAndPrice>{bet.date} - ({convertToCurrency(bet.price)})</DateAndPrice>
-                <TypeBet color={bet.color}>{bet.type}</TypeBet>
-              </BetInfo>
-            </Bet>  
-          )}
-        </Bets>
+          <Bets>
+            {listWithFilter.map((bet: { id: number, numbers: string, game: IGame, created_at: string}) =>
+              <Bet key={bet.id}>
+                <Separator color={bet.game?.color} />
+                <BetInfo>
+                  <Numbers>
+                    <h4>{bet.numbers}</h4>
+                  </Numbers>
+                  <DateAndPrice>{bet['created_at']} - ({convertToCurrency(bet.game?.price || 0)})</DateAndPrice>
+                  <TypeBet color={bet.game?.color}>{bet.game?.type}</TypeBet>
+                </BetInfo>
+              </Bet>  
+            )}
+          </Bets>
       </Main>
     </HomeContainer>
   )
