@@ -35,10 +35,11 @@ const Header = () => {
         <LogoHome>
           <h1>TGL</h1>
           {pathname === '/new-bet' && <LinkHome to="/">Home</LinkHome>}
+          {pathname === '/account' && <LinkHome to="/">Home</LinkHome>}
         </LogoHome>
         <LinkContainerDesktop>
           <li>
-            <Link to="#">Account</Link>
+            <Link to="/account">Account</Link>
           </li>
           <li>
             <Link to="/" onClick={handleLogout}>

@@ -8,6 +8,7 @@ import ForgotPassword from "../pages/ForgotPassword";
 import Home from "../pages/Home";
 import NewBet from "../pages/NewBet";
 import ResetPassword from "../pages/ResetPassword";
+import Account from "../pages/Account";
 
 
 const Routes: React.FC = () => {
@@ -27,6 +28,7 @@ const Routes: React.FC = () => {
       <Route path="/reset-password" exact component={publicRoute(ResetPassword)} />
       <Route path="/home" exact component={privateRoute(Home)} />
       <Route path="/new-bet" exact component={privateRoute(NewBet)} />
+      <Route path="/account" exact component={privateRoute(Account)} />
     </Switch>
   );
 };
